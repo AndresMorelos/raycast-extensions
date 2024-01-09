@@ -1,11 +1,13 @@
 import { spawn } from "child_process";
-import { runAppleScript } from "run-applescript";
 import * as util from "util";
 import { DebugStyle, logDebug } from "./dev-utils";
-import { CalendarDuration, EventType, ReturnType } from "./types";
+import { CalendarDuration, EventType, ImageData, PDFData, ReturnType } from "./types";
 import { environment } from "@raycast/api";
 import path from "path";
 import { filterString } from "./context-utils";
+import * as fs from "fs";
+import * as os from "os";
+import { runAppleScript } from "@raycast/utils";
 
 /**
  * Executes an OSA script using the `osascript` command.
@@ -18,7 +20,7 @@ export const execScript = (
   script: string,
   args: (string | boolean | number)[],
   language = "AppleScript",
-  stderrCallback?: (data: string) => void
+  stderrCallback?: (data: string) => void,
 ): { data: Promise<string>; sendMessage: (msg: string) => void } => {
   let data = "";
   let sendMessage: (msg: string) => void = (msg: string) => {
@@ -39,7 +41,7 @@ export const execScript = (
       "-l",
       language,
       ...args.map((x) => x.toString()),
-    ].join(" ")}"`
+    ].join(" ")}"`,
   );
 
   proc.stdout?.on("data", (chunk) => {
@@ -183,6 +185,17 @@ export const searchNearbyLocations = async (query: string) => {
 };
 
 /**
+ * Displays a dialog window with the provided title and content
+ * @param title The title of the dialog window.
+ * @param content The message text of the dialog window.
+ */
+export const showDialog = async (title: string, content: string) => {
+  return runAppleScript(
+    `display dialog "${content.replaceAll('"', '\\"')}" with title "${title.replaceAll('"', '\\"')}"`,
+  );
+};
+
+/**
  * Gets the names of all currently running non-background applications.
  * @returns A promise that resolves to a comma-separated list of application names.
  */
@@ -274,7 +287,8 @@ export const ScriptRunner = {
     useFaceDetection: boolean,
     useRectangleDetection: boolean,
     useSaliencyAnalysis: boolean,
-    confidenceThreshold = 0.7
+    useHorizonDetection: boolean,
+    confidenceThreshold = 0.7,
   ) =>
     runScript(
       "ImageFeatureExtractor",
@@ -286,17 +300,9 @@ export const ScriptRunner = {
       useFaceDetection,
       useRectangleDetection,
       useSaliencyAnalysis,
-      confidenceThreshold
-    ) as Promise<{
-      output: string;
-      imageText: string;
-      imagePOI: string;
-      imageBarcodes: string;
-      imageAnimals: string;
-      imageRectangles: string;
-      imageSubjects: string;
-      imageFaces: string;
-    }>,
+      useHorizonDetection,
+      confidenceThreshold,
+    ) as Promise<ImageData>,
 
   /**
    * Extracts text from a PDF file.
@@ -307,11 +313,28 @@ export const ScriptRunner = {
    * @returns An object containing the extracted text.
    */
   PDFTextExtractor: (filePath: string, useOCR: boolean, pageLimit: number, useMetadata: boolean) =>
-    runScript("PDFTextExtractor", ReturnType.JSON, "AppleScript", filePath, useOCR, pageLimit, useMetadata) as Promise<{
-      pdfOCRText: string;
-      pdfRawText: string;
-      imageText: string;
-    }>,
+    runScript(
+      "PDFTextExtractor",
+      ReturnType.JSON,
+      "AppleScript",
+      filePath,
+      useOCR,
+      pageLimit,
+      useMetadata,
+    ) as Promise<PDFData>,
+
+  /**
+   * Analyzes an instantaneous screenshot of the display, extracting various features. Deletes the screenshot after analysis.
+   * @returns The path of the screenshot file.
+   */
+  ScreenCapture: async (windowOnly = false) => {
+    const tempPath = path.join(os.tmpdir(), "screenshot.png");
+    console.log("fuck");
+    await (runScript("ScreenCapture", ReturnType.STRING, "JavaScript", tempPath, windowOnly) as Promise<string>);
+    const data = await ScriptRunner.ImageFeatureExtractor(tempPath, true, true, true, true, false, false, 0.7);
+    await fs.promises.rm(tempPath);
+    return data.stringValue;
+  },
 
   /**
    * Gets the selected files from Finder, even if Finder is not the active application.

@@ -12,6 +12,7 @@ import { useModels } from "../../hooks/useModels";
 import CommandSetupForm from "./CommandSetupForm";
 import SpeechInputView from "./SpeechInputView";
 import { useFiles } from "../../hooks/useFiles";
+import { showDialog } from "../../utils/scripts";
 
 export default function CommandResponse(props: {
   commandName: string;
@@ -60,10 +61,10 @@ export default function CommandResponse(props: {
     Promise.resolve(runReplacements(prompt, context, [commandName], options)).then((subbedPrompt) => {
       if (options.outputKind == "list" && subbedPrompt.trim().length > 0) {
         subbedPrompt +=
-          "<Format the output as a single list with each item separated by '~~~'. Do not provide any other commentary, headings, or data.>";
+          "\n\n<Format the output as a single list with each item separated by '~~~'. Do not provide any other commentary, headings, or data.>";
       } else if (options.outputKind == "grid" && subbedPrompt.trim().length > 0) {
         subbedPrompt +=
-          "<Format the output as a single list with each item separated by '~~~'. At the start of each item, put an object emoji or person emoji that represents that item followed by '$$$'. Do not provide any other commentary, headings, or data.>";
+          "\n\n<Format the output as a single list with each item separated by '~~~'. At the start of each item, put an object emoji or person emoji that represents that item followed by '$$$'. Do not provide any other commentary, headings, or data.>";
       }
 
       setSubstitutedPrompt(subbedPrompt);
@@ -74,7 +75,7 @@ export default function CommandResponse(props: {
   const contentPromptString = fileContents?.contents || "";
   const fullPrompt = (substitutedPrompt.replaceAll("{{contents}}", contentPromptString) + contentPromptString).replace(
     /{{END}}(\n|.)*/,
-    ""
+    "",
   );
 
   const { data, isLoading, revalidate, error } = useModel(
@@ -87,7 +88,7 @@ export default function CommandResponse(props: {
       (!options.minNumFiles || (fileContents?.contents?.length != undefined && fileContents.contents.length > 0)) &&
       !shouldCancel &&
       (!options.useSpeech || (speechInput != "" && speechInput != undefined)),
-    models.models.find((model) => model.id == options.model)
+    models.models.find((model) => model.id == options.model),
   );
 
   useEffect(() => {
@@ -105,13 +106,16 @@ export default function CommandResponse(props: {
           substitutedPrompt.replaceAll("{{contents}}", contentPromptString),
           input || contentPromptString,
           data,
-          options.scriptKind
-        )
+          options.scriptKind,
+        ),
       );
     }
 
     // Update previous command placeholders
     if (!loadingData && !loading && !isLoading && data.length) {
+      if (options.outputKind == "dialogWindow") {
+        Promise.resolve(showDialog(commandName, text));
+      }
       setPreviousCommand(commandName);
       setPreviousResponse(text);
       setPreviousPrompt(fullPrompt);
@@ -159,8 +163,12 @@ export default function CommandResponse(props: {
   }
 
   // Don't show the response if the user has disabled it
-  if (options.showResponse == false || (!loadingData && substitutedPrompt == "")) {
-    if (options.showResponse == false) {
+  if (
+    options.showResponse == false ||
+    options.outputKind == "dialogWindow" ||
+    (!loadingData && substitutedPrompt == "")
+  ) {
+    if (options.showResponse == false || options.outputKind == "dialogWindow") {
       Promise.resolve(showHUD(`Running '${commandName}'...`));
     }
 

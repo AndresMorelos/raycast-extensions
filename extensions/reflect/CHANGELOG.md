@@ -1,5 +1,12 @@
 # Reflect Changelog
 
+## Multiple List Options - 2023-11-21
+- Add support for multiple list options in preferences
+
+## [OAuth] - 2023-07-20
+
+- Use the native Reflect OAuth PKCE API
+
 ## [Time format] - 2023-07-10
 
 ### Added

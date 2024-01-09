@@ -1,4 +1,5 @@
 {
+  "$schema": "https://www.raycast.com/schemas/extension.json",
   "name": "harvest",
   "title": "Harvest",
   "description": "Access Harvest Time Entries",
@@ -70,6 +71,14 @@
       "mode": "no-view"
     },
     {
+      "name": "toggleTimer",
+      "icon": "toggle.png",
+      "title": "Toggle Timer",
+      "subtitle": "Harvest",
+      "description": "Toggles the most recently used Harvest Timer",
+      "mode": "no-view"
+    },
+    {
       "name": "menu-bar",
       "title": "Running Timer",
       "subtitle": "Harvest",
@@ -78,6 +87,15 @@
       "interval": "1m",
       "disabledByDefault": true,
       "preferences": [
+        {
+          "name": "showTimerInMenuBar",
+          "label": "Show Timer in Menu Bar",
+          "title": "Options",
+          "description": "Show your running timer in the menu bar",
+          "type": "checkbox",
+          "default": true,
+          "required": false
+        },
         {
           "name": "callbackURLStart",
           "title": "Callback URL - Timer Started",
@@ -91,6 +109,15 @@
           "description": "URL to open when a running timer stops. See README for more info.",
           "type": "textfield",
           "required": false
+        },
+        {
+          "name": "statusFolder",
+          "title": "Status Folder",
+          "type": "directory",
+          "description": "Folder to write status files to. See README for more info.",
+          "required": false,
+          "label": "Status Folder",
+          "placeholder": "Select a directory"
         }
       ]
     }

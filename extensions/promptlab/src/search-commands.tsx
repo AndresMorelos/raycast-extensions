@@ -12,7 +12,7 @@ import { CommandControlsActionsSection } from "./components/Commands/actions/Com
 import { useAdvancedSettings } from "./hooks/useAdvancedSettings";
 import { useCachedState } from "@raycast/utils";
 import { AdvancedActionSubmenu } from "./components/actions/AdvancedActionSubmenu";
-import { commandCategories } from "./utils/constants";
+import { COMMAND_CATEGORIES } from "./utils/constants";
 
 export default function SearchCommand(props: { arguments: { commandName: string; queryInput: string } }) {
   const { commandName, queryInput } = props.arguments;
@@ -20,7 +20,7 @@ export default function SearchCommand(props: { arguments: { commandName: string;
   const [previousCommand] = useCachedState<string>("promptlab-previous-command", "");
   const [targetCategory, setTargetCategory] = useState<string>("All");
   const [searchText, setSearchText] = useState<string | undefined>(
-    commandName == undefined || queryInput ? undefined : commandName.trim()
+    commandName == undefined || queryInput ? undefined : commandName.trim(),
   );
   const { advancedSettings } = useAdvancedSettings();
   const preferences = getPreferenceValues<searchPreferences & ExtensionPreferences>();
@@ -34,7 +34,7 @@ export default function SearchCommand(props: { arguments: { commandName: string;
     }
   }, [loadingCommands]);
 
-  if ((commands && commandNames.includes(commandName)) || commands.map((cmd) => cmd.id).includes(commandName)) {
+  if (commandNames.includes(commandName) || commands.map((cmd) => cmd.id).includes(commandName)) {
     const command = commands.find((cmd) => cmd.id == commandName || cmd.name == commandName);
     if (!command) {
       return null;
@@ -113,7 +113,7 @@ export default function SearchCommand(props: { arguments: { commandName: string;
 
   // Group commands by category, if enabled
   if (preferences.groupByCategory && targetCategory == "All") {
-    listItems = commandCategories.reduce((acc, category) => {
+    listItems = COMMAND_CATEGORIES.reduce((acc, category) => {
       const categoryCommands = commands?.filter((command) => {
         // If a command has no categories, it is considered to be in the "Other" category
         return (!command.categories?.length && category.name == "Other") || command.categories?.[0] == category.name;
@@ -128,7 +128,7 @@ export default function SearchCommand(props: { arguments: { commandName: string;
         acc.push(
           <List.Section title={category.name} key={category.name}>
             {categoryListItems}
-          </List.Section>
+          </List.Section>,
         );
       }
       return acc;
@@ -143,7 +143,7 @@ export default function SearchCommand(props: { arguments: { commandName: string;
       command.favorited ? acc[0].push(command) : acc[1].push(command);
       return acc;
     },
-    [[], []] as [Command[], Command[]]
+    [[], []] as [Command[], Command[]],
   );
 
   return (
