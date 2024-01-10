@@ -250,6 +250,7 @@
 /extensions/decentraland                             @fmiras
 /extensions/deduplicator                             @lryong
 /extensions/deepcast                                 @mooxl @peter-gy @Popalay @MonsterDeveloper @YamenSharaf @EvanZhouDev @erics118
+/extensions/deepl-api-usage                          @DophinL @pernielsentikaer
 /extensions/defichain-dobby                          @adrian-schnell
 /extensions/defichain-lottery                        @adrian-schnell @pernielsentikaer
 /extensions/defiscan                                 @adrian-schnell
@@ -446,6 +447,7 @@
 /extensions/google-trends                            @kkange
 /extensions/google-workspace                         @thomaslombart @mathieudutour
 /extensions/gopass                                   @bake
+/extensions/gradle-plugins                           @alex-w0
 /extensions/grafana                                  @Lp-Francois
 /extensions/grafbase                                 @mlafeldt @notrab
 /extensions/grammari-x                               @hakob8956
@@ -560,10 +562,12 @@
 /extensions/kafka                                    @fonimus
 /extensions/kagi-fastgpt                             @httpjamesm
 /extensions/kagi-search                              @fearoffish
+/extensions/kaleidoscope                             @anfalas
 /extensions/kaomoji-search                           @allexks
 /extensions/karabiner-profile-switcher               @lucaschultz @erics118
 /extensions/keepassxc                                @zkytech @Sulfyderz
 /extensions/key-value                                @NirLevy98 @pernielsentikaer @gkpln3
+/extensions/keyboard-brightness                      @neo773
 /extensions/keyboard-layout-switcher                 @lucaschultz
 /extensions/keyboard-maestro                         @eluce2 @suaw3k
 /extensions/keyboard-shortcut-sequences              @SKaplanOfficial
@@ -841,7 +845,7 @@
 /extensions/podcasts-now                             @cloudy9101
 /extensions/pokedex                                  @anhthang
 /extensions/polished                                 @LekoArts
-/extensions/pomodoro                                 @KELiON @pernielsentikaer @brodelp @susonthapa
+/extensions/pomodoro                                 @KELiON @pernielsentikaer @brodelp @susonthapa @mikikiv
 /extensions/popicons                                 @lucaschultz
 /extensions/porkbun                                  @xmok
 /extensions/port-manager                             @lucaschultz
@@ -1108,6 +1112,7 @@
 /extensions/tennis-standings                         @faisal3389
 /extensions/terminal                                 @ron-myers
 /extensions/terminalfinder                           @yedongze
+/extensions/terraform-doc                            @shoppingjaws
 /extensions/tesla                                    @WilliamWelsh
 /extensions/text-decorator                           @koinzhang
 /extensions/text-differ                              @fishfisher
@@ -1122,7 +1127,7 @@
 /extensions/thesaurus                                @ABukSwienty
 /extensions/things                                   @loris @andreaselia @thomaslombart
 /extensions/thrasher-magazine                        @whitespacecode
-/extensions/ticktick                                 @viduycheung @viduycheung @Alireza29675
+/extensions/ticktick                                 @viduycheung @viduycheung @Alireza29675 @Yakitrak
 /extensions/tim                                      @tmwrnr
 /extensions/time-logger                              @aramikuto
 /extensions/time-traveling-world-clock               @himarky
@@ -1207,6 +1212,7 @@
 /extensions/vc-ru-news                               @khlebobul
 /extensions/vercast                                  @MaxLeiter @gleich @dgrcode
 /extensions/verify-number                            @xmok
+/extensions/viacep                                   @xilopaint
 /extensions/vim-bro                                  @ajaypremshankar
 /extensions/virtualbox-power-switch                  @DiogoFerrer
 /extensions/visual-studio-code-project-manager       @MarkusLanger @GastroGeek @4very @theherk @TobiasYin @yossizahn @eduwass
