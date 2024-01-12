@@ -176,6 +176,7 @@
 /extensions/code-review-emojis                       @rus64
 /extensions/code-saver                               @Gnosnay
 /extensions/code-stash                               @ben-greenwood
+/extensions/codeforces-extension                     @Iron0utlaw
 /extensions/codegeex                                 @MBearo
 /extensions/codegrepper                              @emircanerkul @pernielsentikaer
 /extensions/codesnap                                 @Mokkapps @pernielsentikaer
@@ -385,6 +386,7 @@
 /extensions/focustask                                @vojto @pernielsentikaer
 /extensions/folder-search                            @GastroGeek @omarshahine @fengtianze
 /extensions/fontawesome                              @dutzi @DanielFerguson
+/extensions/footy-report                             @thuoe
 /extensions/fork-repositories                        @sxn
 /extensions/format-graphql                           @tngranados
 /extensions/fotmob                                   @sonla58
@@ -740,7 +742,9 @@
 /extensions/nixpkgs-search                           @aiotter
 /extensions/nmbs-planner                             @SamuelVanhaecke
 /extensions/node-js-evaluate                         @selfish
+/extensions/node-version-manager                     @AndresMorelos
 /extensions/nos-news                                 @Joran-Dob
+/extensions/note-in-google-doc                       @mnttnm
 /extensions/noteplan-3                               @shakedlokits @lukerandall @pr1mal
 /extensions/notion                                   @HenriChabrand @mathieudutour @metakirby5 @thomaslombart @erics118 @bkeys818 @AlexIsMaking @Yakitrak @tleo19
 /extensions/notion_researcher                        @razgaon
@@ -795,6 +799,7 @@
 /extensions/opsgenie                                 @ricoberger
 /extensions/opslevel                                 @DuckyC
 /extensions/orion                                    @Plonq @erics118
+/extensions/osint-web-check                          @gksander
 /extensions/oss-browser                              @404J
 /extensions/ossinsight                               @k8scat @pernielsentikaer
 /extensions/outline-page                             @praveenjuge
@@ -859,6 +864,7 @@
 /extensions/premier-league                           @anhthang
 /extensions/prettier                                 @aeither @jasonwaters
 /extensions/primer                                   @colebemis
+/extensions/prism-launcher                           @lockieluke
 /extensions/prisma-cli-commands                      @rajmasha
 /extensions/privileges                               @ph00lt0
 /extensions/productboard                             @honzatmn
@@ -1045,6 +1051,7 @@
 /extensions/sm-ms                                    @koinzhang
 /extensions/smultron                                 @blackspike
 /extensions/snake                                    @tonka3000
+/extensions/snap-jot                                 @k41531
 /extensions/sncftraintimes                           @Pierrad
 /extensions/social-network-trends                    @koinzhang
 /extensions/solana-explorer                          @TrGiLong @AnishDe12020
@@ -1096,7 +1103,7 @@
 /extensions/svgl                                     @davidho0403
 /extensions/svgo                                     @kaichii @kgrhartlage
 /extensions/svgr                                     @rickMcGavin
-/extensions/swift-evolution                          @BProg
+/extensions/swift-evolution                          @BProg @dehesa @pernielsentikaer
 /extensions/swift-package-index                      @maximkrouk
 /extensions/switch-game-play-history                 @kvdo2
 /extensions/switchhosts                              @tiancheng92
